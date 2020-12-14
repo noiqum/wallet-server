@@ -57,7 +57,7 @@ module.exports = {
             if (err.message.includes('password')) {
                 res.status(400).json({ password: err.message })
             } else {
-                res.status(400).json({ email: err.message })
+                res.status(400).json({ email: `${err.message}+${email}` })
             }
 
         }
