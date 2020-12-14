@@ -43,7 +43,7 @@ module.exports = {
     login: async function (req, res) {
         const { email, password } = req.body;
         try {
-            const user = await User.login(email, password);
+            const user = await User.login(req.body.email, req.body.password);
             const token = createToken(user._id)
             res.cookie('jwt', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
             if (user.bills) {
@@ -57,7 +57,7 @@ module.exports = {
             if (err.message.includes('password')) {
                 res.status(400).json({ password: err.message })
             } else {
-                res.status(400).json({ email: `${err.message}+${email}` })
+                res.status(400).json({ email: `${err.message}` })
             }
 
         }
