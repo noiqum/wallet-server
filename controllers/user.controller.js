@@ -41,9 +41,10 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     login: async function (req, res) {
-        const { email, password } = req.body;
+
         try {
-            const user = await User.login(req.body.email, req.body.password);
+            const { email, password } = req.body;
+            const user = await User.login(email, password);
             const token = createToken(user._id)
             res.cookie('jwt', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
             if (user.bills) {
