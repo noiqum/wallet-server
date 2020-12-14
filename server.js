@@ -86,3 +86,10 @@ app.get('/bill/:filename', (req, res) => {
 //         res.send('hello there')
 //     })
 // }
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.json())
+    app.use(routes)
+    app.use(cookieParser())
+
+}
