@@ -98,5 +98,5 @@ if (process.env.NODE_ENV === 'production') {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(routes)
     app.use(cookieParser())
-
+    require('dotenv').config();
 }
